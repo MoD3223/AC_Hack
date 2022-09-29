@@ -16,6 +16,9 @@
     <Filter Include="Proc">
       <UniqueIdentifier>{6c4faf8d-145a-495a-bb0c-c081d19a5d36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Voids">
+      <UniqueIdentifier>{0276074b-07aa-4665-818c-6295b94a2259}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AC_Hack.cpp">
@@ -25,12 +28,15 @@
       <Filter>Proc</Filter>
     </ClCompile>
     <ClCompile Include="Voids.cpp">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>Voids</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Proc.h">
       <Filter>Proc</Filter>
+    </ClInclude>
+    <ClInclude Include="Voids.h">
+      <Filter>Voids</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

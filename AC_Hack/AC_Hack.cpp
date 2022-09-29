@@ -7,6 +7,7 @@
 #include <Windows.h>
 #include <TlHelp32.h>
 #include <algorithm>
+#include "Voids.h"
 
 using namespace std;
 /*
@@ -41,7 +42,6 @@ void forceWrite() {
 
 */
 
-
 int main()
 {
 	//Get ProcID
@@ -63,6 +63,7 @@ int main()
 	uintptr_t dynamicPointerBaseAddress = moduleBase + 0x17E0A8;
 
 	cout << "Dynamic Pointer Base Address == 0x" << hex << dynamicPointerBaseAddress << endl;
+	AutoQuit(dynamicPointerBaseAddress);
 
 	//Resolve pointer chain
 
@@ -71,47 +72,43 @@ int main()
 	vector<unsigned int> healthOffset = { 0xEC };
 	vector<unsigned int> ammoOffeset = { 0x140,0x11C,0x138,0x114,0x13C,0x118,0x134,0x110,0x130,0x10C,0x144,0x12C,0x108 };
 	vector<unsigned int> armorOffset = { 0xF0 };
+	//TO FILL
+	vector<unsigned int> playerXOffset = { 0x00 };
+	vector<unsigned int> playerYOffset = { 0x00 };
+	vector<unsigned int> playerZOffset = { 0x00 };
+	uintptr_t playerXAddressPointer = FindDMAAddy(hProcess, dynamicPointerBaseAddress, playerXOffset, 0);
+	uintptr_t playerYAddressPointer = FindDMAAddy(hProcess, dynamicPointerBaseAddress, playerYOffset, 0);
+	uintptr_t playerZAddressPointer = FindDMAAddy(hProcess, dynamicPointerBaseAddress, playerZOffset, 0);
+
 	uintptr_t healthAddress = FindDMAAddy(hProcess, dynamicPointerBaseAddress, healthOffset, 0);
 	uintptr_t armorAddress = FindDMAAddy(hProcess, dynamicPointerBaseAddress, armorOffset, 0);
 	//cout << "Ammo Address == 0x" << hex << ammoAddress << endl;
 
 	//Read value
-	int ammoValue = 0;
+	//int ammoValue = 0;
 	//ReadProcessMemory(hProcess, (BYTE*)ammoAddress, &ammoValue, sizeof(ammoValue), nullptr);
 	//cout << "Current ammo = " << dec << ammoValue << endl;
 
 
 
-
 	//Write to it
-	int newHealth = 9999;
-	int newAmmo = 101;
-	int newArmor = 100;
-
-
-	do
-	{
-		WriteProcessMemory(hProcess, (BYTE*)healthAddress, &newHealth, sizeof(newHealth), nullptr);
-		WriteProcessMemory(hProcess, (BYTE*)armorAddress, &newArmor, sizeof(newArmor), nullptr);
-			for (int i = 0; i < ammoOffeset.size(); i++)
-			{
-				uintptr_t ammoAddress = FindDMAAddy(hProcess, dynamicPointerBaseAddress, ammoOffeset, i);
-				ReadProcessMemory(hProcess, (BYTE*)ammoAddress, &ammoValue, sizeof(ammoValue), nullptr);
-				//Prevents crashing on suicide
-				if (ammoValue < 30)
-				{
-					WriteProcessMemory(hProcess, (BYTE*)ammoAddress, &newAmmo, sizeof(newAmmo), nullptr);
-				}
-			}
-	} while (true);
-
-
+	WriteHealthArmor(healthAddress, 9999, armorAddress, 100,procID,hProcess);
+	WriteAmmo(ammoOffeset, 0, 101, dynamicPointerBaseAddress, hProcess);
 
 
 	//Read again
 	//ReadProcessMemory(hProcess, (BYTE*)ammoAddress, &ammoValue, sizeof(ammoValue), nullptr);
 
 	//cout << "New ammo = " << dec << ammoValue << endl;
+
+
+
+	//Aimbot+WH
+
+	PlayerClass LocalPlayer(hProcess, playerXAddressPointer, playerYAddressPointer, playerZAddressPointer);
+
+
+
 
 
 	getchar();

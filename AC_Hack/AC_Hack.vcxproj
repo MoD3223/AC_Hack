@@ -132,6 +132,7 @@
     <ClCompile Include="Voids.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Voids.h" />
     <ClInclude Include="Proc.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
