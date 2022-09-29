@@ -40,7 +40,7 @@ void Aimbot(PlayerClass player) {
 
 	while (true)
 	{
-		player();
+		//player();
 		Sleep(2);
 	}
 }
