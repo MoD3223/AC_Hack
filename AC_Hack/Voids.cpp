@@ -6,6 +6,8 @@
 #include <algorithm>
 #include "Voids.h"
 
+
+
 void WriteHealthArmor(uintptr_t healthAddress, int newHealth, uintptr_t armorAddress, int newArmor, DWORD procID, HANDLE hProcess) {
 	hProcess = OpenProcess(PROCESS_VM_OPERATION | PROCESS_VM_READ | PROCESS_VM_WRITE, FALSE, procID);
 	WriteProcessMemory(hProcess, (BYTE*)healthAddress, &newHealth, sizeof(newHealth), nullptr);
@@ -40,7 +42,7 @@ void Aimbot(PlayerClass player) {
 
 	while (true)
 	{
-		//player();
+		cout << "Current coordinates: " << player.playerX << " " << player.playerY << " " << player.playerZ << endl;
 		Sleep(2);
 	}
 }

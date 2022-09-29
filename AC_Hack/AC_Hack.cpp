@@ -106,8 +106,8 @@ int main()
 	//Aimbot+WH
 
 	PlayerClass LocalPlayer(hProcess, playerXAddressPointer, playerYAddressPointer, playerZAddressPointer);
-
-
+	Aimbot(LocalPlayer);
+	
 
 
 

@@ -20,10 +20,12 @@ public:
 		playerY = ReadProcessMemory(hProcess, (BYTE*)playerYAddressPointer, &playerYAddressPointer, sizeof(playerYAddressPointer), nullptr);
 		playerZ = ReadProcessMemory(hProcess, (BYTE*)playerZAddressPointer, &playerZAddressPointer, sizeof(playerZAddressPointer), nullptr);
 	}
-	private:
+	//private:
 	int playerHealth;
 	int playerX;
 	int playerY;
 	int playerZ;
 	float playerMagnitude;
 };
+
+void Aimbot(PlayerClass player);
